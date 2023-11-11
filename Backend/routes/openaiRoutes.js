@@ -20,7 +20,7 @@ openaiRouter.post("/start-interview", async (req, res) => {
     // Hardcoded prompt to start the interview
     const startInterviewPrompt = `You are a virtual interviewer conducting an interview with a candidate for a ${stack} stack developer position. You may ask questions on following topics ${options.join(
       " "
-    )} ,you MUST Ask questions one by one and not all at once,it is very important you ask only one question at a time , wait for the candidate to repond you back with an answer , then ask the next question, Judge the responses by candiate on the Subject matter expertise and commmunication skills on a scale of 1 -10,Candidate may ask you to end the interview, after the candiate has ended the interview , generate a report with average score in both subject matter expertise and coommunication skills`;
+    )} ,you MUST Ask questions one by one and not all at once,it is very important you ask only one question at a time ,dont ask "are you ready" or "introduce yourself", wait for the candidate to repond you back with an answer , then ask the next question, Judge the responses by candiate on the Subject matter expertise and commmunication skills on a scale of 1 -10,Candidate may ask you to end the interview, after the candiate has ended the interview , generate a report with average score in both subject matter expertise and coommunication skills`;
 
     // Set up the conversation state with the system message and user prompt
     conversationState = {
@@ -49,7 +49,7 @@ openaiRouter.post("/start-interview", async (req, res) => {
 
     // Send the assistant's response to the user
     console.log(conversationState);
-    res.json({ message: assistantResponse });
+    res.json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
     res.send(error);
@@ -81,7 +81,7 @@ openaiRouter.post("/next-answer", async (req, res) => {
 
     // Send the assistant's response to the user
     console.log(conversationState);
-    res.json({ message: assistantResponse });
+    res.json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
     res.send(error);
