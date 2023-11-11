@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import {AiFillSetting} from "react-icons/ai"
 import {FcOnlineSupport} from "react-icons/fc"
+import {LuMonitorSmartphone} from "react-icons/lu"
 import {BsMedium} from "react-icons/bs"
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -32,13 +33,13 @@ const Sidebar: React.FC = () => {
             icon: <FaTh />
         },
         {
-            path: "/user",
-            name: "User",
-            icon: <FaUserAlt />
+            path: "/interview",
+            name: "Interview",
+            icon: <LuMonitorSmartphone />
         },
         {
-            path: "/analytics",
-            name: "Analytics",
+            path: "/insight",
+            name: "Insight",
             icon: <FaRegChartBar />
         },
         {
@@ -56,18 +57,18 @@ const Sidebar: React.FC = () => {
     return (
         <div className="flex">
             <div style={{ width: isOpen ? "250px" : "50px" }} className="h-screen bg-black text-white transition-all duration-500">
-                <div className=" px-4 py-5 flex items-center">
+                <div className=" px-4 py-5 flex items-center mb-6">
 
 
                 <span  style={{ display: isOpen ? "block" : "none" }}>
                     <div className='flex'>
                     <BsMedium className=' pt-1 text-4xl text-customColor'/>
-                        <h1  className="text-3xl ms-3">Ankit</h1>
+                        <h1  className="text-3xl ms-3">Interview</h1>
                     </div>
                        
                         </span>
                     
-                    <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className=" flex text-2xl ml-12">
+                    <div style={{ marginLeft: isOpen ? "20px" : "0px" }} className="mt-2 flex text-2xl ">
                         <FaBars onClick={toggle} />
                     </div>
                 </div>
@@ -80,8 +81,8 @@ const Sidebar: React.FC = () => {
             </div>
             <main className='w-full p-5'>
                 
-                <h1 className='text-center text-red-700 font-bold text-3xl'>
-                {location.pathname === '/' ? 'Home' : location.pathname === '/user' ? 'User' : location.pathname === '/analytics' ? 'analytics':location.pathname === "/feedback"?"Feedback" : location.pathname === "/settings"? "settings"  :'Nothing'}
+                <h1 className='text-center text-customColor font-bold text-6xl mt-48'>
+                {location.pathname === '/' ? 'Home' : location.pathname === '/interview' ? 'Interview' : location.pathname === '/insight' ? 'Insight':location.pathname === "/feedback"?"Feedback" : location.pathname === "/settings"? "Tata-Bye-Bye-Khtam"  :'Nothing'}
                 </h1>
             </main>
         </div>
@@ -91,3 +92,7 @@ const Sidebar: React.FC = () => {
 
 export default Sidebar;
 
+    {/* <span className='flex gap-4 rounded-2xl p-3 hover:bg-customColor'>
+                        <div className="text-xl mt-1">{item.icon}</div>
+                        <div style={{ display: isOpen ? "block" : "none" }} className="text-xl">{item.name}</div>
+                        </span> */}
