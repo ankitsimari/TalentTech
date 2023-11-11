@@ -116,7 +116,7 @@ openaiRouter.post("/end-interview", async (req, res) => {
 
     // Send the interview report to the user
     console.log(conversationState);
-    res.json({ message: assistantResponse });
+    res.json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
     res.send(error);
