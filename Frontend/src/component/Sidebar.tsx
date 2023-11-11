@@ -6,11 +6,13 @@ import {
     FaRegChartBar,
     FaCommentAlt,
 } from "react-icons/fa";
-import {AiFillSetting} from "react-icons/ai"
-import {FcOnlineSupport} from "react-icons/fc"
+import {AiFillSetting,AiOutlineSetting} from "react-icons/ai"
+import {MdOutlineFeedback,MdInsights} from "react-icons/md"
+import {RxDashboard} from "react-icons/rx"
 import {LuMonitorSmartphone} from "react-icons/lu"
 import {BsMedium} from "react-icons/bs"
 import { NavLink, useLocation } from 'react-router-dom';
+import Home from './Home';
 
 interface MenuItem {
     path: string;
@@ -30,7 +32,7 @@ const Sidebar: React.FC = () => {
         {
             path: "/",
             name: "Dashboard",
-            icon: <FaTh />
+            icon: <RxDashboard />
         },
         {
             path: "/interview",
@@ -40,26 +42,24 @@ const Sidebar: React.FC = () => {
         {
             path: "/insight",
             name: "Insight",
-            icon: <FaRegChartBar />
+            icon: <MdInsights />
         },
         {
             path: "/feedback",
             name: "Feedback",
-            icon: <FaCommentAlt />
+            icon: <MdOutlineFeedback />
         },
         {
             path: "/settings",
             name: "Settings",
-            icon: <AiFillSetting />
+            icon: <AiOutlineSetting />
         }
     ];
 
     return (
         <div className="flex">
-            <div style={{ width: isOpen ? "250px" : "50px" }} className="h-screen bg-black text-white transition-all duration-500">
+            <div style={{ width: isOpen ? "250px" : "50px" }} className=" h-screen bg-black text-white transition-all duration-500">
                 <div className=" px-4 py-5 flex items-center mb-6">
-
-
                 <span  style={{ display: isOpen ? "block" : "none" }}>
                     <div className='flex'>
                     <BsMedium className=' pt-1 text-4xl text-customColor'/>
@@ -74,16 +74,16 @@ const Sidebar: React.FC = () => {
                 </div>
                 {menuItem.map((item, index) => (
                     <NavLink to={item.path} key={index} className="link py-3 px-4 flex text-white gap-4 transition-all duration-500 hover:text-black hover:bg-customColor hover:px-5" >
-                        <div className="text-xl mt-1">{item.icon}</div>
+                        <div style={{ marginLeft: isOpen ? "30px" : "0px" }} className="text-xl mt-1">{item.icon}</div>
                         <div style={{ display: isOpen ? "block" : "none" }} className="text-xl">{item.name}</div>
                     </NavLink>
                 ))}
             </div>
             <main className='w-full p-5'>
                 
-                <h1 className='text-center text-customColor font-bold text-6xl mt-48'>
-                {location.pathname === '/' ? 'Home' : location.pathname === '/interview' ? 'Interview' : location.pathname === '/insight' ? 'Insight':location.pathname === "/feedback"?"Feedback" : location.pathname === "/settings"? "Tata-Bye-Bye-Khtam"  :'Nothing'}
-                </h1>
+                {/*  */}
+                {location.pathname === '/' ? <Home/> : location.pathname === '/interview' ? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Interview </h1>  : location.pathname === '/insight' ? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Insight </h1> :location.pathname === "/feedback"?<h1 className='text-center text-customColor font-bold text-6xl mt-48'> Feedback </h1>: location.pathname === "/settings"? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Tata-bye-bye-Khtam </h1>  :'Nothing'}
+                {/**/}
             </main>
         </div>
     );
