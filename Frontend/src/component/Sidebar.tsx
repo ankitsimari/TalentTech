@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
-import {
-    FaTh,
-    FaBars,
-    FaUserAlt,
-    FaRegChartBar,
-    FaCommentAlt,
-} from "react-icons/fa";
-import {AiFillSetting,AiOutlineSetting} from "react-icons/ai"
+import {AiFillSetting,AiOutlineSetting,AiOutlineLeftCircle,AiOutlineRightCircle,AiOutlineQuestionCircle} from "react-icons/ai"
 import {MdOutlineFeedback,MdInsights} from "react-icons/md"
 import {RxDashboard} from "react-icons/rx"
 import {LuMonitorSmartphone} from "react-icons/lu"
-import {BsMedium} from "react-icons/bs"
+import {BsMedium,BsChatLeftDots} from "react-icons/bs"
 import { NavLink, useLocation } from 'react-router-dom';
 import Home from './Home';
 
@@ -53,6 +46,11 @@ const Sidebar: React.FC = () => {
             path: "/settings",
             name: "Settings",
             icon: <AiOutlineSetting />
+        },
+        {
+            path: "/faq",
+            name: "FAQ",
+            icon: <AiOutlineQuestionCircle />
         }
     ];
 
@@ -69,7 +67,8 @@ const Sidebar: React.FC = () => {
                         </span>
                     
                     <div style={{ marginLeft: isOpen ? "20px" : "0px" }} className="mt-2 flex text-2xl ">
-                        <FaBars onClick={toggle} />
+                        {/* <FaBars onClick={toggle} /> */}
+                        {isOpen?<AiOutlineLeftCircle className='text-3xl' onClick={toggle}  />: <AiOutlineRightCircle className='text-3xl' onClick={toggle} />}
                     </div>
                 </div>
                 {menuItem.map((item, index) => (
