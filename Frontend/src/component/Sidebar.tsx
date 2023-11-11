@@ -6,6 +6,10 @@ import {LuMonitorSmartphone} from "react-icons/lu"
 import {BsMedium,BsChatLeftDots} from "react-icons/bs"
 import { NavLink, useLocation } from 'react-router-dom';
 import Home from './Home';
+import Analytics from './Analytics';
+import Faq from './Faq';
+import SpeechToText from './SpeechToText';
+
 
 interface MenuItem {
     path: string;
@@ -61,12 +65,12 @@ const Sidebar: React.FC = () => {
                 <span  style={{ display: isOpen ? "block" : "none" }}>
                     <div className='flex'>
                     <BsMedium className=' pt-1 text-4xl text-customColor'/>
-                        <h1  className="text-3xl ms-3">Interview</h1>
+                        <h1  className="text-3xl ms-3">Recruiter</h1>
                     </div>
                        
                         </span>
                     
-                    <div style={{ marginLeft: isOpen ? "20px" : "0px" }} className="mt-2 flex text-2xl ">
+                    <div style={{ marginLeft: isOpen ? "16px" : "0px" }} className="mt-2 flex text-2xl ">
                         {/* <FaBars onClick={toggle} /> */}
                         {isOpen?<AiOutlineLeftCircle className='text-3xl' onClick={toggle}  />: <AiOutlineRightCircle className='text-3xl' onClick={toggle} />}
                     </div>
@@ -81,7 +85,7 @@ const Sidebar: React.FC = () => {
             <main className='w-full p-5'>
                 
                 {/*  */}
-                {location.pathname === '/' ? <Home/> : location.pathname === '/interview' ? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Interview </h1>  : location.pathname === '/insight' ? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Insight </h1> :location.pathname === "/feedback"?<h1 className='text-center text-customColor font-bold text-6xl mt-48'> Feedback </h1>: location.pathname === "/settings"? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> Tata-bye-bye-Khtam </h1>  :'Nothing'}
+                {location.pathname === '/' ? <Home/> : location.pathname === '/interview' ? <SpeechToText/> : location.pathname === '/insight' ? <Analytics/> :location.pathname === "/feedback"?<h1 className='text-center text-customColor font-bold text-6xl mt-48'> Feedback </h1>: location.pathname === "/settings"? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> kiski Setting...? </h1>  :<Faq/>}
                 {/**/}
             </main>
         </div>
