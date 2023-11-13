@@ -5,8 +5,9 @@ import LineChart from "../component/Chart/LineChart";
 import PolarChart from "../component/Chart/PolarChart";
 
 const Analytics = () => {
+  const [chart,setChart] = useState("bar")
   const name = ["Subject", "Communication", "Interview"];
-  const colors = ["#FC6183", "#81a05f", "#FBCA57"];
+  const colors = ["#7a3ff3", "black", "rgb(247,190,56)"];
   const Length = [9, 5, 7];
 
   const [userData, setUserData] = useState({
@@ -22,44 +23,57 @@ const Analytics = () => {
     ],
   });
 
+  const data = {
+    labels: ["Interview 1", "Interview 2", "Interview 3"],
+    datasets: [
+      {
+        label: "Subject",
+        data: [10, 20, 15],
+        backgroundColor: colors,
+        borderWidth: 2,
+        fill: false,
+      },
+      {
+        label: "Communication",
+        data: [5, 15, 10],
+        backgroundColor: colors,
+        borderWidth: 2,
+        fill: false,
+      },
+      {
+        label: "Communication",
+        data: [8, 12, 11],
+        backgroundColor: colors,
+        borderWidth: 2,
+        fill: false,
+      }
+
+    ],
+  };
+
   return (
     <div>
-      <div className="d-block m-auto ms-3">
-        <span className="flex gap-4 mt-5">
+
+      <select value={chart} className="ms-8 px-3 py-2 border-2 font-bold border-solid text-customColor border-customColor" onChange={(e)=>setChart(e.target.value)}>
+        <option value="line">Line</option>
+        <option value="bar">Bar</option>
+      </select>
+        
+      <div className="">
           <div
             className="shadow p-4"
-            style={{ width: "60%" }}
+            style={{ width: "80%" }}
             data-aos="fade-right"
           >
-            <BarChart chatData={userData} />
+            {chart=="bar"?<BarChart chatData={data} /> : <LineChart chatData={data} />}
+            
           </div>
-          <div
-            className="shadow p-4"
-            style={{ width: "33%" }}
-            data-aos="fade-left"
-          >
-            <PieChart chatData={userData} />
-          </div>
-        </span>
-        <span className="flex gap-4 mt-5">
-          <div
-            className="shadow p-4"
-            style={{ width: "60%" }}
-            data-aos="fade-right"
-          >
-            <LineChart chatData={userData} />
-          </div>
-          <div
-            className="shadow p-4"
-            style={{ width: "33%" }}
-            data-aos="fade-left"
-          >
-            <PolarChart chatData={userData} />
-          </div>
-        </span>
+     
+            
+
+     
       </div>
       {/* <LineChart chatData={userData} /> */}
- 
     </div>
   );
 };
