@@ -20,6 +20,12 @@ const Chat = () => {
     (store: Store) => store.interviewReducer
   );
 
+  /**
+   const { initialPrompt, conversation, isLoading } = useSelector(
+    (store: Store) => store.interviewReducer
+  );
+   */
+
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 

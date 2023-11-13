@@ -48,11 +48,6 @@ const Sidebar: React.FC = () => {
       icon: <MdInsights />,
     },
     {
-      path: "/feedback",
-      name: "Feedback",
-      icon: <MdOutlineFeedback />,
-    },
-    {
       path: "/settings",
       name: "Settings",
       icon: <AiOutlineSetting />,
@@ -124,11 +119,6 @@ const Sidebar: React.FC = () => {
           <Interview />
         ) : location.pathname === "/insight" ? (
           <Analytics />
-        ) : location.pathname === "/feedback" ? (
-          <h1 className="text-center text-customColor font-bold text-6xl mt-48">
-            {" "}
-            Feedback{" "}
-          </h1>
         ) : location.pathname === "/settings" ? (
           <SpeechToText />
         ) : location.pathname === "/auth" ? (

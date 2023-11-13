@@ -6,7 +6,7 @@ type Score = {
 };
 
 export type User = {
-    name: string;
+    username: string;
     email: string;
     password: string;
     scores: Score[];
@@ -22,7 +22,7 @@ const initState: InitState = {
     isLoading: false,
     isError: false,
     user: {
-        name: "",
+        username: "",
         email: "",
         password: "",
         scores: [],
