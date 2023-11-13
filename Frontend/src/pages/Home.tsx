@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { InitState as authInitState } from "../redux/auth/reducer";
 import { InitState as interviewInitState } from "../redux/interview/reducer";
-import Loader from "./Loader";
+import Loader from "../component/Loader";
 import {
   getUserFailure,
   getUserRequest,
   getUserSuccess,
 } from "../redux/auth/action";
 import axios from "axios";
-import Navbar from "./Navbar";
+import Navbar from "../component/Navbar";
 import { useNavigate } from "react-router-dom";
-import Topics from "./Topics";
+import Topics from "../component/Topics";
 import { setInitialPromptSuccess } from "../redux/interview/action";
 
 export type Store = {
