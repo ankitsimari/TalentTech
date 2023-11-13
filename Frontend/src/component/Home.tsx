@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { InitState } from "../redux/auth/reducer";
+import { InitState as authInitState } from "../redux/auth/reducer";
+import { InitState as interviewInitState } from "../redux/interview/reducer";
 import Loader from "./Loader";
 import {
   getUserFailure,
@@ -11,10 +12,11 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import Topics from "./Topics";
+import { setInitialPromptSuccess } from "../redux/interview/action";
 
-type Store = {
-  authReducer: InitState;
-  interviewReducer: InitState;
+export type Store = {
+  authReducer: authInitState;
+  interviewReducer: interviewInitState;
 };
 
 const Home = () => {
@@ -34,14 +36,16 @@ const Home = () => {
   };
 
   //function to start interview
-  const handleStart = () => {
+  const handleStart = async () => {
 
     const interviewScript = {
       techStack: techStack,
-      topics: topics
+      options: [`Any ${techStack} topics`]
     }
 
-    console.log(interviewScript);
+    // console.log(interviewScript);
+    
+    await dispatch(setInitialPromptSuccess(interviewScript));
 
     setLoadingInterviewState((prev) => !prev);
     setTimeout(() => {

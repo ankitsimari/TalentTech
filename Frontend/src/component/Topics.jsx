@@ -27,7 +27,7 @@ const Topics = ({techStack}) => {
 
         <div>
             { topics.length>0&&topics.map((ele,index) => {
-                return (<TopicsButton title={ele} />)
+                return (<TopicsButton title={ele} key={index} />)
             })  }
         </div>
     </div>
