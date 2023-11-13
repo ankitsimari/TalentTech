@@ -49,10 +49,10 @@ openaiRouter.post("/start-interview", async (req, res) => {
 
     // Send the assistant's response to the user
     console.log(conversationState);
-    res.json({ role: "assistant", content: assistantResponse });
+    res.status(200).json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -81,10 +81,10 @@ openaiRouter.post("/next-answer", async (req, res) => {
 
     // Send the assistant's response to the user
     console.log(conversationState);
-    res.json({ role: "assistant", content: assistantResponse });
+    res.status(200).json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -116,10 +116,10 @@ openaiRouter.post("/end-interview", async (req, res) => {
 
     // Send the interview report to the user
     console.log(conversationState);
-    res.json({ role: "assistant", content: assistantResponse });
+    res.status(200).json({ role: "assistant", content: assistantResponse });
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(400).json({ error: error.message });
   }
 });
 
