@@ -63,7 +63,7 @@ const Sidebar: React.FC = () => {
       icon: <AiOutlineQuestionCircle />,
     },
     {
-      path: "/login",
+      path: "/auth",
       name: "Login",
       icon: <AiOutlineQuestionCircle />,
     },
@@ -131,7 +131,7 @@ const Sidebar: React.FC = () => {
           </h1>
         ) : location.pathname === "/settings" ? (
           <SpeechToText />
-        ) : location.pathname === "/login" ? (
+        ) : location.pathname === "/auth" ? (
           <Login />
         ) : (
           <Faq />
