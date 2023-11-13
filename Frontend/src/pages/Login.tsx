@@ -132,6 +132,8 @@ export const Login: React.FC = () => {
               type="password"
               placeholder="Password"
               className="input-field"
+              value={password}
+              onChange={(e) => setPass(e.target.value)}
             />
             <button type="submit" className="button1">
               Sign In
