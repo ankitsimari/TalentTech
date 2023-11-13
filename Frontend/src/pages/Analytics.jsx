@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import BarChart from "./Chart/BarChart";
-import PieChart from "./Chart/PieChart";
-import LineChart from "./Chart/LineChart";
-import PolarChart from "./Chart/PolarChart";
+import BarChart from "../component/Chart/BarChart";
+import PieChart from "../component/Chart/PieChart";
+import LineChart from "../component/Chart/LineChart";
+import PolarChart from "../component/Chart/PolarChart";
 
 const Analytics = () => {
   const name = ["Subject", "Communication", "Interview"];

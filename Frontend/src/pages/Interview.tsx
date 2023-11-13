@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Store } from "../component/Home";
+import { Store } from "./Home";
 import axios from "axios";
 import {
   addInteractionFailure,
