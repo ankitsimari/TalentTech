@@ -9,6 +9,7 @@ import Home from './Home';
 import Analytics from './Analytics';
 import Faq from './Faq';
 import SpeechToText from './SpeechToText';
+import { Login } from '../pages/Login';
 
 
 interface MenuItem {
@@ -55,6 +56,11 @@ const Sidebar: React.FC = () => {
             path: "/faq",
             name: "FAQ",
             icon: <AiOutlineQuestionCircle />
+        },
+        {
+            path: "/login",
+            name: "Login",
+            icon: <AiOutlineQuestionCircle />
         }
     ];
 
@@ -85,7 +91,7 @@ const Sidebar: React.FC = () => {
             <main className='w-full p-5'>
                 
                 {/*  */}
-                {location.pathname === '/' ? <Home/> : location.pathname === '/interview' ? <SpeechToText/> : location.pathname === '/insight' ? <Analytics/> :location.pathname === "/feedback"?<h1 className='text-center text-customColor font-bold text-6xl mt-48'> Feedback </h1>: location.pathname === "/settings"? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> kiski Setting...? </h1>  :<Faq/>}
+                {location.pathname === '/' ? <Home/> : location.pathname === '/interview' ? <SpeechToText/> : location.pathname === '/insight' ? <Analytics/> :location.pathname === "/feedback"?<h1 className='text-center text-customColor font-bold text-6xl mt-48'> Feedback </h1>: location.pathname === "/settings"? <h1 className='text-center text-customColor font-bold text-6xl mt-48'> kiski Setting...? </h1>  : location.pathname === '/login' ? <Login/> : <Faq/>  } 
                 {/**/}
             </main>
         </div>
