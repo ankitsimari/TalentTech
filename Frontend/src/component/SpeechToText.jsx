@@ -2,16 +2,16 @@
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import useClipboard from "react-use-clipboard";
 import {useState} from "react";
-
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 const SpeechToText = () => {
     const [textToCopy, setTextToCopy] = useState();
+    const {speak} = useSpeechSynthesis();
     const [isCopied, setCopied] = useClipboard(textToCopy, {
         successDuration:1000
     });
 
-    //subscribe to thapa technical for more awesome videos
-
+//    use transcript to get audio to String
     const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
     const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
@@ -20,6 +20,12 @@ const SpeechToText = () => {
     }
 
     console.log(transcript)
+
+    // here we can put whatever we want as audio in place of the transcript
+    const handleOnClick = () => {
+        speak({text:transcript})
+      }
+
 
     return (
         <div>
@@ -38,6 +44,7 @@ const SpeechToText = () => {
                     </button> */}
                     <button className= 'text-customColor mr-4 rounded-md border border-solid py-4 px-6 cursor-pointer border-customColor focus:bg-customColor focus:text-white hover:bg-customColor font-bold hover:text-white hover:shadow-md' onClick={startListening}>Start Listening</button>
                     <button  className= 'text-customColor border border-solid border-customColor rounded-md py-4 px-6 focus:bg-customColor focus:text-white hover:bg-customColor font-bold cursor-pointer hover:text-white hover:shadow-md' onClick={SpeechRecognition.stopListening}>Stop Listening</button>
+                    <button  className= 'text-customColor border border-solid border-customColor rounded-md py-4 px-6 focus:bg-customColor focus:text-white hover:bg-customColor font-bold cursor-pointer hover:text-white hover:shadow-md' onClick={()=>{handleOnClick()}}>Listen</button>
 
                 </div>
             </div>
