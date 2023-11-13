@@ -3,6 +3,7 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import useClipboard from "react-use-clipboard";
 import {useState} from "react";
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { useSelector } from 'react-redux';
 
 const SpeechToText = () => {
     const [textToCopy, setTextToCopy] = useState();
@@ -10,7 +11,8 @@ const SpeechToText = () => {
     const [isCopied, setCopied] = useClipboard(textToCopy, {
         successDuration:1000
     });
-
+    const data = useSelector((state=>state.interviewReducer.conversation));
+    console.log(data)
 //    use transcript to get audio to String
     const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
     const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -26,6 +28,7 @@ const SpeechToText = () => {
         speak({text:transcript})
       }
 
+      
 
     return (
         <div>
