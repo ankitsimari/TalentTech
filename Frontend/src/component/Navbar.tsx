@@ -3,11 +3,13 @@ import { BiUserCircle } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { getUsernameFromCookie, removeAuthCookies } from "../utils/cookie";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Store } from "../pages/Home";
 
 export default function Navbar() {
   const isAuth = false;
-  const username = getUsernameFromCookie();
   const navigate = useNavigate();
+  const { user } = useSelector((store:Store) => { return store.authReducer })
 
   const handleLogout = () => {
     removeAuthCookies();
@@ -27,10 +29,10 @@ export default function Navbar() {
           <BiUserCircle className=' text-4xl'/>
       </span>} */}
 
-      {username ? (
+      {user.username ? (
         <div className="flex" >
           <span className="flex border border-solid border-customColor px-3 py-1 rounded-3xl mt-1">
-            <p className="text-2xl mx-3">{username}</p>
+            <p className="text-2xl mx-3">{user.username}</p>
             <BiUserCircle className="text-4xl" />
           </span>
           <button className="border border-solid border-customColor px-3 py-1 rounded-3xl mt-1" onClick={handleLogout}>Logout</button>
