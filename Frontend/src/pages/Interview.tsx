@@ -5,7 +5,7 @@ import { AiTwotoneAudio } from "react-icons/ai";
 import Audio from "../component/Interview/Audio";
 import Video from "../component/Interview/Video";
 import styled from "styled-components"
-import SpeechToText from "./SpeechToText";
+import SpeechToText from "../component/Interview/SpeechToText";
 
 const Interview = () => {
   const [interviewState, setInterviewState] = useState("chat");
@@ -18,8 +18,8 @@ const Interview = () => {
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-center ">
+    <div className="p-5" >
+      <div className="flex items-center justify-center">
         <BUTTON
           type="button"
           name="chat"
@@ -27,15 +27,6 @@ const Interview = () => {
           className="interview-button"
         >
           <BsFillChatFill className="w-5 h-5 " />
-        </BUTTON>
-
-        <BUTTON
-          type="button"
-          name="audio"
-          onClick={handleInterviewMode}
-          className="interview-button"
-        >
-          <AiTwotoneAudio className="w-5 h-5 " />
         </BUTTON>
 
         <BUTTON
@@ -49,8 +40,7 @@ const Interview = () => {
       </div>
 
       {interviewState === "chat" && <Chat />}
-      {interviewState === "audio" && <SpeechToText />}
-      {interviewState === "video" && <Video />}
+      {interviewState === "video" && <SpeechToText />}
 
     </div>
   );

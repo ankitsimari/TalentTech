@@ -6,6 +6,7 @@ import {
   AiOutlineRightCircle,
   AiOutlineQuestionCircle,
 } from "react-icons/ai";
+import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineFeedback, MdInsights } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { LuMonitorSmartphone } from "react-icons/lu";
@@ -14,7 +15,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 import Analytics from "../pages/Analytics";
 import Faq from "../pages/Faq";
-import SpeechToText from "../pages/SpeechToText";
+import SpeechToText from "./Interview/SpeechToText";
 import { Login } from "../pages/Login";
 import Interview from "../pages/Interview";
 import LandingPage from "../pages/LandingPage";
@@ -35,6 +36,11 @@ const Sidebar: React.FC = () => {
   const menuItem: MenuItem[] = [
     {
       path: "/",
+      name: "Home",
+      icon: <IoHomeOutline />,
+    },
+    {
+      path: "/dashboard",
       name: "Dashboard",
       icon: <RxDashboard />,
     },
@@ -49,18 +55,8 @@ const Sidebar: React.FC = () => {
       icon: <MdInsights />,
     },
     {
-      path: "/settings",
-      name: "Settings",
-      icon: <AiOutlineSetting />,
-    },
-    {
       path: "/faq",
       name: "FAQ",
-      icon: <AiOutlineQuestionCircle />,
-    },
-    {
-      path: "/home",
-      name: "Home",
       icon: <AiOutlineQuestionCircle />,
     },
   ];
@@ -69,25 +65,25 @@ const Sidebar: React.FC = () => {
     <div className="flex">
       <div
         style={{ width: isOpen ? "250px" : "50px" }}
-        className=" h-screen bg-black text-white transition-all duration-500"
+        className=" h-screen bg-black text-white transition-all duration-500 sticky top-0 "
       >
         <div className=" px-4 py-5 flex items-center mb-6">
           <span style={{ display: isOpen ? "block" : "none" }}>
-            {/* <div className="flex">
+            <div className="flex">
               <BsMedium className=" pt-1 text-4xl text-customColor" />
               <h1 className="text-3xl ms-3">Recruiter</h1>
-            </div> */}
+            </div>
           </span>
 
           <div
             style={{ marginLeft: isOpen ? "16px" : "0px" }}
-            className="mt-2 flex text-2xl "
+            className="mt-2 flex text-2xl"
           >
             {/* <FaBars onClick={toggle} /> */}
             {isOpen ? (
-              <AiOutlineLeftCircle className="text-3xl" onClick={toggle} />
+              <AiOutlineLeftCircle className="text-2xl" onClick={toggle} />
             ) : (
-              <AiOutlineRightCircle className="text-3xl" onClick={toggle} />
+              <AiOutlineRightCircle className="text-2xl" onClick={toggle} />
             )}
           </div>
         </div>
@@ -112,20 +108,18 @@ const Sidebar: React.FC = () => {
           </NavLink>
         ))}
       </div>
-      <main className="w-full p-5">
+      <main className="w-full">
         {/*  */}
         {location.pathname === "/" ? (
+          <LandingPage />
+        ) : location.pathname === "/dashboard" ? (
           <Home />
         ) : location.pathname === "/interview" ? (
           <Interview />
         ) : location.pathname === "/insight" ? (
           <Analytics />
-        ) : location.pathname === "/settings" ? (
-          <SpeechToText />
         ) : location.pathname === "/login" ? (
           <Login />
-        ) : location.pathname === "/home" ? (
-          <LandingPage />
         ) : (
           <Faq />
         )}

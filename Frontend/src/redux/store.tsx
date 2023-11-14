@@ -3,6 +3,7 @@ import {reducer as authReducer} from "./auth/reducer";
 import {reducer as interviewReducer} from "./interview/reducer";
 
 export const baseURL = "http://localhost:7700";
+// export const baseURL = `https://talenttech-production.up.railway.app`;
 
 const rootReducer = combineReducers({  
     authReducer,

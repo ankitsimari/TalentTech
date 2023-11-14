@@ -87,7 +87,7 @@ const Home = () => {
   
 
   return (
-    <div className="home-div">
+    <div className="home-div p-5">
       <Navbar />
       <h1 className="text-4xl	font-medium	">
         Welcome, <span className="text-lg	font-normal">{user.username}</span>
