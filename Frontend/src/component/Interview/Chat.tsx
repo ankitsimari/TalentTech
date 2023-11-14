@@ -11,10 +11,12 @@ import { baseURL } from "../../redux/store";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import styled from "styled-components";
+import Cookies from "js-cookie";
 
 const Chat = () => {
   const [answer, setAnswer] = useState("");
   const [showSkeleton, setShowSkeleton] = useState(false);
+  const token = Cookies.get("token");
 
   const { initialPrompt, conversation, isLoading } = useSelector(
     (store: Store) => store.interviewReducer
@@ -36,7 +38,12 @@ const Chat = () => {
       handleSkeleton();
       dispatch(addInteractionRequest());
       axios
-        .post(`${baseURL}/openai/start-interview`, initialPrompt)
+        .post(`${baseURL}/openai/start-interview`, initialPrompt,  {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type as needed
+          },
+        })
         .then((res) => {
           console.log(res.data);
           dispatch(addInteractionSuccess(res.data));
@@ -79,7 +86,12 @@ const Chat = () => {
     dispatch(addInteractionRequest());
     handleSkeleton();
     axios
-      .post(`${baseURL}/openai/next-answer`, { answer })
+      .post(`${baseURL}/openai/next-answer`, { answer },  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json", // Adjust content type as needed
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(addInteractionSuccess(res.data));
@@ -105,7 +117,12 @@ const Chat = () => {
     dispatch(addInteractionRequest());
     handleSkeleton();
     axios
-      .post(`${baseURL}/openai/end-interview`)
+      .post(`${baseURL}/openai/end-interview`,  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json", // Adjust content type as needed
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(addInteractionSuccess(res.data));
