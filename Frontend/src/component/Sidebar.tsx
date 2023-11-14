@@ -17,6 +17,7 @@ import Faq from "../pages/Faq";
 import SpeechToText from "../pages/SpeechToText";
 import { Login } from "../pages/Login";
 import Interview from "../pages/Interview";
+import LandingPage from "../pages/LandingPage";
 
 interface MenuItem {
   path: string;
@@ -58,8 +59,8 @@ const Sidebar: React.FC = () => {
       icon: <AiOutlineQuestionCircle />,
     },
     {
-      path: "/auth",
-      name: "Login",
+      path: "/home",
+      name: "Home",
       icon: <AiOutlineQuestionCircle />,
     },
   ];
@@ -72,10 +73,10 @@ const Sidebar: React.FC = () => {
       >
         <div className=" px-4 py-5 flex items-center mb-6">
           <span style={{ display: isOpen ? "block" : "none" }}>
-            <div className="flex">
+            {/* <div className="flex">
               <BsMedium className=" pt-1 text-4xl text-customColor" />
               <h1 className="text-3xl ms-3">Recruiter</h1>
-            </div>
+            </div> */}
           </span>
 
           <div
@@ -121,8 +122,10 @@ const Sidebar: React.FC = () => {
           <Analytics />
         ) : location.pathname === "/settings" ? (
           <SpeechToText />
-        ) : location.pathname === "/auth" ? (
+        ) : location.pathname === "/login" ? (
           <Login />
+        ) : location.pathname === "/home" ? (
+          <LandingPage />
         ) : (
           <Faq />
         )}

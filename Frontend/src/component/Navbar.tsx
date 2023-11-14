@@ -1,7 +1,7 @@
 import React from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { getUsernameFromCookie, removeAuthCookies } from "../utils/cookie";
+import { removeAuthCookies } from "../utils/cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Store } from "../pages/Home";

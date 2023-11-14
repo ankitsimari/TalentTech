@@ -80,7 +80,7 @@ const Home = () => {
   }, []);
 
   if (!token) {
-    return <Navigate to={"/auth"} />;
+    return <Navigate to={"/login"} />;
   }
 
   console.log(user);
