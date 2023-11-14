@@ -2,10 +2,10 @@ import React from 'react'
 import {Bar} from "react-chartjs-2";
 import {Chart as ChartJS} from "chart.js/auto"
 
-export default function BarChart({chatData}) {
+export default function BarChart({chatData,options}) {
   return (
     <div>
-        <Bar data={chatData}/>
+        <Bar data={chatData} options={options}/>
     </div>
   )
 }
