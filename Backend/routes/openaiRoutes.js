@@ -95,7 +95,7 @@ openaiRouter.post("/next-answer", jwtSecurity.verifyToken, async (req, res) => {
 // Endpoint to end the interview and generate a report
 openaiRouter.post(
   "/end-interview",
-  jwtSecurity.verifyToken,
+  // jwtSecurity.verifyToken,
   async (req, res) => {
     try {
       // Hardcoded prompt to end the interview
@@ -123,7 +123,7 @@ openaiRouter.post(
       // Send the interview report to the user
       console.log(conversationState);
       const numbers = assistantResponse.match(/\b[0-9]\b/g);
-      const user = await UserModel.findById(req.userId, { password: 0 });
+      const user = await UserModel.findOne({email: req.body.email}, { password: 0 });
       user.scores.push({
         Subject_Matter: numbers[0],
         Communication: numbers[1],

@@ -7,7 +7,7 @@ import {
   addInteractionRequest,
   addInteractionSuccess,
 } from "../../redux/interview/action";
-import { baseURL } from "../../redux/store";
+import { baseURL, store } from "../../redux/store";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import styled from "styled-components";
@@ -21,6 +21,7 @@ const Chat = () => {
   const { initialPrompt, conversation, isLoading } = useSelector(
     (store: Store) => store.interviewReducer
   );
+  const { user } = useSelector((store:Store) => store.authReducer)
 
   /**
    const { initialPrompt, conversation, isLoading } = useSelector(
@@ -121,7 +122,7 @@ const Chat = () => {
     console.log("token", token);
 
     axios
-      .post(`${baseURL}/openai/end-interview`, {
+      .post(`${baseURL}/openai/end-interview`, {email: user.email}, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -151,6 +152,7 @@ const Chat = () => {
             return (
               <div
                 key={index}
+                className="flex align-middle"
                 style={{
                   border: "1px solid grey",
                   borderRadius: "0.5rem",
@@ -159,8 +161,10 @@ const Chat = () => {
                   marginTop: "1rem",
                 }}
               >
-                <h3 className={ele.role == "assistant"? "text-red-700" : "text-green-700 "}>{ele.role}</h3>
-                <h4 className="text-black ">{ele.content}</h4>
+                <div className = {ele.role == "assistant"? "bg-stone-900 rounded-md py-1 px-2 text-white mr-2 h-max w-20" : "bg-violet-800 rounded-md py-1 px-6 text-white mr-2 h-max"} >
+                  <h3 >{ele.role}</h3>
+                </div>
+                <h4 className="text-black">{ele.content}</h4>
               </div>
             );
           })}

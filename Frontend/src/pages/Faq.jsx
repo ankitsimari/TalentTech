@@ -39,7 +39,7 @@ export default function Faq() {
           <div className="py-5">
             <details className="group">
               <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
-                <span> How does billing work?</span>
+                <span>What are tech stacks & topics?</span>
                 <span className="transition group-open:rotate-180">
                   <svg
                     fill="none"
@@ -57,17 +57,15 @@ export default function Faq() {
                 </span>
               </summary>
               <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                We offers a variety of billing options, including monthly and
-                annual subscription plans, as well as pay-as-you-go pricing for
-                certain services. Payment is typically made through a credit
-                card or other secure online payment method.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit magnam recusandae laborum perferendis itaque, dolorem officiis, dolorum voluptatum facilis odio iure, iste aspernatur quidem. Libero, voluptatum. Sit maxime repellat asperiores.
+                Veritatis minima cupiditate explicabo numquam, molestias nihil sunt dignissimos. Tenetur fuga ipsa non quas sit rem, beatae, pariatur voluptatum nobis nulla odio incidunt! Itaque suscipit obcaecati delectus, nostrum fuga quod.
               </p>
             </details>
           </div>
           <div className="py-5">
             <details className="group">
               <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
-                <span> Can I get a refund for my subscription?</span>
+                <span>Why is there delay in the responses?</span>
                 <span className="transition group-open:rotate-180">
                   <svg
                     fill="none"
@@ -85,18 +83,14 @@ export default function Faq() {
                 </span>
               </summary>
               <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                We offers a 30-day money-back guarantee for most of its
-                subscription plans. If you are not satisfied with your
-                subscription within the first 30 days, you can request a full
-                refund. Refunds for subscriptions that have been active for
-                longer than 30 days may be considered on a case-by-case basis.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo, expedita at laboriosam quisquam consectetur explicabo libero, animi soluta ipsum, consequuntur doloribus. Aliquid rem totam soluta minus ratione velit incidunt commodi.
               </p>
             </details>
           </div>
           <div className="py-5">
             <details className="group">
               <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
-                <span> How do I cancel my subscription?</span>
+                <span>What's the analytics data?</span>
                 <span className="transition group-open:rotate-180">
                   <svg
                     fill="none"
@@ -114,10 +108,7 @@ export default function Faq() {
                 </span>
               </summary>
               <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                To cancel your We subscription, you can log in to your account
-                and navigate to the subscription management page. From there,
-                you should be able to cancel your subscription and stop future
-                billing.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit excepturi sit recusandae in, facilis veritatis dignissimos amet earum quod quaerat eaque expedita inventore at nulla exercitationem modi! Maxime, voluptatum sit!
               </p>
             </details>
           </div>
@@ -142,9 +133,7 @@ export default function Faq() {
                 </span>
               </summary>
               <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                We offers a free trial of its platform for a limited time.
-                During the trial period, you will have access to a limited set
-                of features and functionality, but you will not be charged.
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium inventore excepturi quam praesentium eveniet eaque nam quod ipsa totam laudantium! Voluptatibus officia magni ea sed maxime nemo tenetur nihil voluptas?
               </p>
             </details>
           </div>
@@ -169,10 +158,7 @@ export default function Faq() {
                 </span>
               </summary>
               <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                Documentation is available on the company's website and can be
-                accessed by logging in to your account. The documentation
-                provides detailed information on how to use the , as well as
-                code examples and other resources.
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus porro nostrum, repellendus quo libero unde repellat nesciunt laudantium eius commodi, corporis voluptatibus et nulla adipisci deleniti itaque maiores voluptas ea.
               </p>
             </details>
           </div>
