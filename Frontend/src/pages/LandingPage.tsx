@@ -2,14 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import mockup from "../assets/Talent Tech.png";
 import { BsMedium } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { Store } from "../pages/Home";
 import { getAuthTokenFromCookie } from "../utils/cookie";
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
-    const { user } = useSelector((store:Store) => { return store.authReducer })
-
     const cookie = getAuthTokenFromCookie()
 
     const handleLoginClick = () => {
