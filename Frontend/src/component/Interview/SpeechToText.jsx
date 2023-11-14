@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -5,7 +6,6 @@ import useClipboard from "react-use-clipboard";
 import { useSpeechSynthesis } from "react-speech-kit";
 import Chat from "./Chat";
 
-import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {
@@ -17,6 +17,7 @@ import { baseURL } from "../../redux/store";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import styled from "styled-components";
+import Cookies from "js-cookie";
 
 const SpeechToText = () => {
   const [textToCopy, setTextToCopy] = useState();
@@ -28,7 +29,7 @@ const SpeechToText = () => {
     successDuration: 1000,
   });
   const videoRef = useRef(null); // Reference to the video element
-
+  const token = Cookies.get("token");
   // const data = useSelector((state=>state.interviewReducer.conversation));
   // console.log(data)
 
@@ -56,18 +57,7 @@ const SpeechToText = () => {
       handleSkeleton();
       dispatch(addInteractionRequest());
 
-      // Open the camera when the page loads
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-          }
-        })
-        .catch((err) => {
-          console.error("Error accessing camera:", err);
-          dispatch(addInteractionFailure());
-        });
+
 
       axios
         .post(`${baseURL}/openai/start-interview`, initialPrompt)
@@ -80,7 +70,18 @@ const SpeechToText = () => {
           dispatch(addInteractionFailure());
         });
     }
-
+            // Open the camera when the page loads
+            navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then((stream) => {
+              if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+              }
+            })
+            .catch((err) => {
+              console.error("Error accessing camera:", err);
+              dispatch(addInteractionFailure());
+            });
     // Close the camera when navigating away from the component
     return () => {
       if (videoRef.current) {
@@ -106,7 +107,7 @@ const SpeechToText = () => {
   useEffect(() => {
     const a = data.map((e) => e.role);
     let content = data.map((e) => e.content);
-    setRoles(a[content.length - 1]);
+    setRoles(a[a.length - 1]);
     setsound(content[content.length - 1]);
   }, [data]);
   useEffect(() => {
@@ -119,7 +120,8 @@ const SpeechToText = () => {
 
   const startListening = () =>
   SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
-const { transcript, browserSupportsSpeechRecognition } =
+const { transcript,resetTranscript,
+  browserSupportsSpeechRecognition } =
   useSpeechRecognition();
 
 if (!browserSupportsSpeechRecognition) {
@@ -139,18 +141,27 @@ if (!browserSupportsSpeechRecognition) {
 
   const handleSubmitAnswer = () => {
     handleSkeleton();
-  
+console.log(transcript)
     const answerInterraction = {
       role: "user",
-      content: transcript, // Use transcript directly here
+      content: transcript,
     };
-  
+
+    // console.log(answerInterraction);
+
     dispatch(addInteractionRequest());
     dispatch(addInteractionSuccess(answerInterraction));
     handleSkeleton();
-  
+    dispatch(addInteractionRequest());
+    handleSkeleton();
+    
     axios
-      .post(`${baseURL}/openai/next-answer`, { answer: transcript })
+      .post(`${baseURL}/openai/next-answer`, { answer },  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(addInteractionSuccess(res.data));
@@ -159,8 +170,10 @@ if (!browserSupportsSpeechRecognition) {
       .catch((err) => {
         dispatch(addInteractionFailure());
       });
-  
+
     setAnswer("");
+    resetTranscript();
+
   };
 
   const handleEndInterview = () => {
@@ -187,30 +200,7 @@ if (!browserSupportsSpeechRecognition) {
       });
   };
 
-  // Chat-end
 
-
-
-
-  //   console.log(data.map((e)=>e.role))
-
-  //    use transcript to get audio to String
-
-
-  // console.log(transcript)
-
-  // here we can put whatever we want as audio in place of the transcript
-  const handleOnClick = () => {
-    if (roles == "assistant") {
-      speak({ text: sound });
-    }
-  };
-
-  //   if(roles=="assistant"&& sound){
-  //     speak({text:sound});
-  //     console.log("spoked")
-  //     setsound("")
-  // }
   console.log(roles, "role");
   console.log(sound, "sound");
   return (
@@ -218,40 +208,12 @@ if (!browserSupportsSpeechRecognition) {
       <div className="p-7 w-2/5">
         <h2 className="text-3xl text-center mb-3">Transcript</h2>
         <video
+        className="rounded"
           ref={videoRef}
           style={{ width: "100%", height: "auto" }}
           autoPlay
         />
-        {/* from "transcript we can get audio-text" */}
-        {/* <div
-          className="main-content h-8 tracking-wide text-lg w-full min-h-full h-auto px-8 py-8 bg-slate-200 rounded-md shadow leading-relaxed"
-          onClick={() => setTextToCopy(transcript)}
-        >
-          {transcript}
-        </div> */}
-
-        {/* <div className="mt-4">
-          <button
-            className="text-customColor mr-4 rounded-md border border-solid py-4 px-6 cursor-pointer border-customColor focus:bg-customColor focus:text-white hover:bg-customColor font-bold hover:text-white hover:shadow-md"
-            onClick={startListening}
-          >
-            Start Listening
-          </button>
-          <button
-            className="text-customColor border border-solid border-customColor rounded-md py-4 px-6 focus:bg-customColor focus:text-white hover:bg-customColor font-bold cursor-pointer hover:text-white hover:shadow-md"
-            onClick={SpeechRecognition.stopListening}
-          >
-            Stop Listening
-          </button>
-          <button
-            className="text-customColor border border-solid border-customColor rounded-md py-4 px-6 focus:bg-customColor focus:text-white hover:bg-customColor font-bold cursor-pointer hover:text-white hover:shadow-md"
-            onClick={() => {
-              handleOnClick();
-            }}
-          >
-            Listen
-          </button>
-        </div> */}
+   
       </div>
 
       <div className="w-3/5">
