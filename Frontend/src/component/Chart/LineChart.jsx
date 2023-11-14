@@ -1,11 +1,13 @@
-import React from 'react'
-import {Line} from "react-chartjs-2";
-import {Chart as ChartJS} from "chart.js/auto"
+// LineChart.js
 
-export default function LineChart({chatData}) {
-  return (
-    <div >
-        <Line data={chatData}/>
-    </div>
-  )
-}
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+
+const LineChart = ({ chatData, options }) => {
+  return <Line data={chatData} options={options} />;
+};
+
+export default LineChart;
+
+
+

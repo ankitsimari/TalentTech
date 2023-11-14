@@ -3,6 +3,7 @@ import BarChart from "../component/Chart/BarChart";
 import PieChart from "../component/Chart/PieChart";
 import LineChart from "../component/Chart/LineChart";
 import PolarChart from "../component/Chart/PolarChart";
+import { useSelector } from "react-redux";
 
 const Analytics = () => {
   const [chart,setChart] = useState("bar")
@@ -23,38 +24,88 @@ const Analytics = () => {
   //   ],
   // });
 
+  const res = useSelector((state=>state.authReducer.user.scores))
+  console.log(res)
+
+  const Interviews = res.map((e,i)=> `Interview-${i+1}`)
+  const Subjects = res.map((e)=>e.Subject_Matter);
+  const Communications = res.map((e)=>e.Communication);
+  const Interview_skills = res.map((e)=>e.Interview);
+  console.log(Interview_skills)
+
+
   const colors = {
     Subject: "#7a3ff3",
     Communication: "black",
     Interview: "rgb(247,190,56)",
   };
   
-  const data = {
-    labels: ["Interview 1", "Interview 2", "Interview 3"],
-    datasets: [
-      {
-        label: "Subject",
-        data: [10, 20, 15],
-        backgroundColor: colors.Subject,
-        borderWidth: 2,
-        fill: false,
-      },
-      {
-        label: "Communication",
-        data: [5, 15, 10],
-        backgroundColor: colors.Communication,
-        borderWidth: 2,
-        fill: false,
-      },
-      {
-        label: "Interview",
-        data: [8, 12, 11],
-        backgroundColor: colors.Interview,
-        borderWidth: 2,
-        fill: false,
-      },
-    ],
-  };
+ 
+const data = {
+  labels: Interviews,
+  datasets: [
+    {
+      label: "Subject",
+      data: Subjects,
+      backgroundColor: colors.Subject,
+      borderWidth: 2,
+      fill: false,
+    },
+    {
+      label: "Communication",
+      data: Communications,
+      backgroundColor: colors.Communication,
+      borderWidth: 2,
+      fill: false,
+    },
+    {
+      label: "Interview",
+      data: Interview_skills,
+      backgroundColor: colors.Interview,
+      borderWidth: 2,
+      fill: false,
+    },
+  ],
+};
+
+const LineData = {
+  labels: Interviews,
+  datasets: [
+    {
+      label: "Subject",
+      data: Subjects,
+      borderColor: colors.Subject,
+      borderWidth: 2,
+      fill: false,
+    },
+    {
+      label: "Communication",
+      data: Communications,
+      borderColor: colors.Communication,
+      borderWidth: 2,
+      fill: false,
+    },
+    {
+      label: "Interview",
+      data: Interview_skills,
+      borderColor: colors.Interview,
+      borderWidth: 2,
+      fill: false,
+    },
+  ],
+};
+
+const options = {
+  scales: {
+    y: {
+      min: 1,
+      max: 10,
+    },
+  },
+};
+
+console.log("Options:", options); // Log options to the console
+  
   return (
     <div >
 
@@ -69,7 +120,7 @@ const Analytics = () => {
             style={{ width: "80%" }}
             data-aos="fade-right"
           >
-            {chart=="bar"?<BarChart chatData={data} /> : <LineChart chatData={data} />}
+            {chart=="bar"?<BarChart chatData={data} options={options} /> : <LineChart chatData={LineData} options={options} />}
             
           </div>
      

@@ -5,6 +5,7 @@ import { AiTwotoneAudio } from "react-icons/ai";
 import Audio from "../component/Interview/Audio";
 import Video from "../component/Interview/Video";
 import styled from "styled-components"
+import SpeechToText from "./SpeechToText";
 
 const Interview = () => {
   const [interviewState, setInterviewState] = useState("chat");
@@ -48,7 +49,7 @@ const Interview = () => {
       </div>
 
       {interviewState === "chat" && <Chat />}
-      {interviewState === "audio" && <Audio />}
+      {interviewState === "audio" && <SpeechToText />}
       {interviewState === "video" && <Video />}
 
     </div>
