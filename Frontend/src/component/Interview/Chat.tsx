@@ -152,7 +152,7 @@ const Chat = () => {
             return (
               <div
                 key={index}
-                className="flex align-middle"
+                className="flex items-start bg-gray-100"
                 style={{
                   border: "1px solid grey",
                   borderRadius: "0.5rem",

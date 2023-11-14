@@ -83,26 +83,20 @@ const Home = () => {
     return <Navigate to={"/login"} />;
   }
 
-  console.log(user);
+  // console.log(user);
   
 
   return (
-    <div className="home-div p-5">
+    <div className="home-div p-5 bg-zinc-200">
       <Navbar />
-      <h1 className="text-4xl	font-medium	">
-        Welcome, <span className="text-lg	font-normal">{user.username}</span>
-      </h1>
+      
 
       <div
         className="mt-10"
         style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}
       >
         <div>
-          <p>Choose your Tech Stack</p>
-
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Select an option
-          </label>
+          <p className="mb-1">Choose your Tech Stack</p>
           <select
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

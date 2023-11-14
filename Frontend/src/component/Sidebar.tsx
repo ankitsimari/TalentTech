@@ -6,6 +6,8 @@ import {
   AiOutlineRightCircle,
   AiOutlineQuestionCircle,
 } from "react-icons/ai";
+import { FaCaretSquareRight } from "react-icons/fa";
+import { FaCaretSquareLeft } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineFeedback, MdInsights } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
@@ -19,6 +21,8 @@ import SpeechToText from "./Interview/SpeechToText";
 import { Login } from "../pages/Login";
 import Interview from "../pages/Interview";
 import LandingPage from "../pages/LandingPage";
+import Logo from "../assets/Logo.png"
+import { ToastContainer } from "react-toastify";
 
 interface MenuItem {
   path: string;
@@ -70,8 +74,7 @@ const Sidebar: React.FC = () => {
         <div className=" px-4 py-5 flex items-center mb-6">
           <span style={{ display: isOpen ? "block" : "none" }}>
             <div className="flex">
-              <BsMedium className=" pt-1 text-4xl text-customColor" />
-              <h1 className="text-3xl ms-3">Recruiter</h1>
+              <img src={Logo} alt="" />
             </div>
           </span>
 
@@ -81,9 +84,9 @@ const Sidebar: React.FC = () => {
           >
             {/* <FaBars onClick={toggle} /> */}
             {isOpen ? (
-              <AiOutlineLeftCircle className="text-2xl" onClick={toggle} />
+              <FaCaretSquareLeft className="text-2xl bg-black text-white  absolute -right-2.5 top-7" onClick={toggle} />
             ) : (
-              <AiOutlineRightCircle className="text-2xl" onClick={toggle} />
+              <FaCaretSquareRight className="text-2xl bg-black text-white  absolute -right-2.5" onClick={toggle} />
             )}
           </div>
         </div>
@@ -108,7 +111,7 @@ const Sidebar: React.FC = () => {
           </NavLink>
         ))}
       </div>
-      <main className="w-full">
+      <main className="w-full bg-zinc-200">
         {/*  */}
         {location.pathname === "/" ? (
           <LandingPage />
@@ -125,6 +128,7 @@ const Sidebar: React.FC = () => {
         )}
         {/**/}
       </main>
+      <ToastContainer position='top-center' />
     </div>
   );
 };

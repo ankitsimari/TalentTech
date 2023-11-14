@@ -6,15 +6,22 @@ import Audio from "../component/Interview/Audio";
 import Video from "../component/Interview/Video";
 import styled from "styled-components"
 import SpeechToText from "../component/Interview/SpeechToText";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 const Interview = () => {
   const [interviewState, setInterviewState] = useState("chat");
+  const token = Cookies.get("token");
 
   const handleInterviewMode = (e:any) => {
     const { name } = e.target;
     // console.log(name);
     setInterviewState(name);
     
+  }
+
+  if (!token) {
+    return <Navigate to={"/login"} />;
   }
 
   return (
