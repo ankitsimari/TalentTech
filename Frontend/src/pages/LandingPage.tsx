@@ -2,13 +2,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import mockup from "../assets/Talent Tech.png";
 import { BsMedium } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { Store } from "../pages/Home";
+import { getAuthTokenFromCookie } from "../utils/cookie";
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
+    const { user } = useSelector((store:Store) => { return store.authReducer })
+
+    const cookie = getAuthTokenFromCookie()
 
     const handleLoginClick = () => {
         navigate("/login")
     }
+
+    const handleDashboardClick = () => {
+      navigate("/dashboard")
+  }
 
   return (
     <div className="text-white text-center bg-gradient-to-t from-purple-700 via-indigo-700 to-gray-900">
@@ -18,8 +28,22 @@ const LandingPage: React.FC = () => {
           <h1 className="text-3xl ms-3">Recruiter</h1>
         </div>
         <div className="flex items-center">
-          <p className="mr-2.5 text-emerald-500 font-bold font-sans">Try for free</p>
-          <button className="px-4 py-2 bg-violet-600 font-black text-white rounded-md" onClick={handleLoginClick}>Login</button>
+          {/* <button className="px-4 py-2 bg-violet-600 font-black text-white rounded-md" onClick={handleLoginClick}>Login</button> */}
+          {cookie ? (
+            <button
+              className="px-4 py-2 bg-violet-600 font-black text-white rounded-md"
+              onClick={handleDashboardClick}
+            >
+              Dashboard
+            </button>
+          ) : (
+            <button
+              className="px-4 py-2 bg-violet-600 font-black text-white rounded-md"
+              onClick={handleLoginClick}
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
       <div className="flex flex-col justify-center items-center mt-36 mb-24">
