@@ -4,11 +4,14 @@ const prompt = require("../utils/promptgenerator");
 const jwtSecurity = require("../middleware/auth.middleware");
 const UserModel = require("../models/user.model");
 
+require("dotenv").config();
+
 const openaiRouter = express.Router();
 
 // Initialize OpenAI with your API key
 const openai = new OpenAI({
-  apiKey: "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",
+  // apiKey: process.env.API_KEY_2,
+  apiKey: process.env.API_KEY
 });
 
 // Initialize a variable to store conversation state

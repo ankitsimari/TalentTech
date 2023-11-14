@@ -4,6 +4,8 @@ import mockup from "../assets/Talent Tech.png";
 import { BsMedium } from "react-icons/bs";
 import { getAuthTokenFromCookie } from "../utils/cookie";
 import Logo from "../assets/Logo.png"
+import { useSelector } from "react-redux";
+import { Store } from "./Home";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
