@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { setAuthCookies } from "../utils/cookie";
 import { baseURL } from "../redux/store";
-import Swal from 'sweetalert2';
 
 export const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
