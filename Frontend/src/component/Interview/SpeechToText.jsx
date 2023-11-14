@@ -206,7 +206,7 @@ console.log(transcript)
   return (
     <div className="flex"> 
       <div className="p-7 w-2/5">
-        <h2 className="text-3xl text-center mb-3">Transcript</h2>
+        {/* <h2 className="text-3xl text-center mb-3">Video</h2> */}
         <video
         className="rounded"
           ref={videoRef}
@@ -216,9 +216,10 @@ console.log(transcript)
    
       </div>
 
-      <div className="w-3/5">
+      <div className="w-3/5 flex-col">
+        {/* <h2 className="text-3xl text-center mb-3">Transcript</h2> */}
         <DIV
-          style={{ height: "60vh", overflowY: "scroll" }}
+          style={{ height: "50vh", overflowY: "scroll" }}
           ref={chatContainerRef}
           id="style-2"
           className="scrollbar"
