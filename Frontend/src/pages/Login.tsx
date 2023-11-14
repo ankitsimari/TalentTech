@@ -1,5 +1,5 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -31,16 +31,15 @@ export const Login: React.FC = () => {
     axios
       .post(`${baseURL}/auth/login`, payload)
       .then((res) => {
-        toast.success("Login Successful");
+        toast.success("Login Successful!");
         console.log(res.data);
         const token = res.data.token;
         setAuthCookies(token);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+        navigate("/dashboard");
       })
-      .catch((err) => {console.log(err)
-        toast.error("Login Failed")
+      .catch((err) => {
+        console.log(err);
+        toast.error("Login Failed!");
       });
 
     setEmail("");
@@ -60,9 +59,7 @@ export const Login: React.FC = () => {
         console.log(res.data);
         const token = res.data.token;
         setAuthCookies(token);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+        navigate("/dashboard");
       })
       .catch((err) => console.log(err));
 
@@ -87,12 +84,13 @@ export const Login: React.FC = () => {
         console.log(res.data);
         const token = res.data.token;
         setAuthCookies(token);
-        toast.success("User Registered Successfully");
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+        toast.success("User Registered Successfully!");
+        navigate("/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("Registration Failed!");
+      });
     setIsSignUp(true);
 
     setUsername("");
@@ -127,7 +125,10 @@ export const Login: React.FC = () => {
               onChange={(e) => setPass(e.target.value)}
               className="bg-eee border border-solid border-gray-300 px-4 py-3 my-2 w-full"
             />
-            <button type="submit" className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 mt-2 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95">
+            <button
+              type="submit"
+              className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 mt-2 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95"
+            >
               Sign Up
             </button>
           </form>
@@ -150,11 +151,17 @@ export const Login: React.FC = () => {
               value={password}
               onChange={(e) => setPass(e.target.value)}
             />
-            <button type="submit" className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 mt-2 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95">
+            <button
+              type="submit"
+              className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 mt-2 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95"
+            >
               Sign In
             </button>
             <br />
-            <button onClick={handleGuestSignInClick} className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase absolute bottom-6 py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95">
+            <button
+              onClick={handleGuestSignInClick}
+              className="border-2 border-solid border-purple-600 bg-purple-600 text-white text-sm font-bold uppercase absolute bottom-6 py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95"
+            >
               Guest Login
             </button>
           </form>
@@ -167,21 +174,28 @@ export const Login: React.FC = () => {
               <p className="text-base font-light leading-5 tracking-wider my-5">
                 To keep connected with us please login with your personal info
               </p>
-              <button className="border-2 border-solid border-white bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95" onClick={handleSignIn}>
+              <button
+                className="border-2 border-solid border-white bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95"
+                onClick={handleSignIn}
+              >
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className="font-bold m-0 text-xl">Hello, Canditate!</h1>
-              <p className="text-base font-light leading-5 tracking-wider my-5">Enter your personal details and start the journey with us</p>
-              <button className="border-2 border-solid border-white bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95" onClick={handleSignUp}>
+              <h1 className="font-bold m-0 text-xl">Hello, Candidate!</h1>
+              <p className="text-base font-light leading-5 tracking-wider my-5">
+                Enter your personal details and start the journey with us
+              </p>
+              <button
+                className="border-2 border-solid border-white bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 rounded transition-transform duration-80 ease-in focus:outline-none active:scale-95"
+                onClick={handleSignUp}
+              >
                 Sign Up
               </button>
             </div>
           </div>
         </div>
       </div>
-      <ToastContainer position='bottom-center' />
     </DIV>
   );
 };
