@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
         const token = res.data.token;
         setAuthCookies(token);
         alert("Login Successful");
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((err) => console.log(err));
 
@@ -54,7 +54,7 @@ export const Login: React.FC = () => {
         const token = res.data.token;
         setAuthCookies(token);
         alert("Guest Login Successful");
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((err) => console.log(err));
 
@@ -80,7 +80,7 @@ export const Login: React.FC = () => {
         const token = res.data.token;
         setAuthCookies(token);
         alert("User Registered Successfully");
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((err) => console.log(err));
     setIsSignUp(true);

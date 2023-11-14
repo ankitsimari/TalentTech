@@ -3,7 +3,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import useClipboard from "react-use-clipboard";
 import { useSpeechSynthesis } from "react-speech-kit";
-import Chat from "../component/Interview/Chat";
+import Chat from "./Chat";
 
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +12,8 @@ import {
   addInteractionFailure,
   addInteractionRequest,
   addInteractionSuccess,
-} from "../redux/interview/action";
-import { baseURL } from "../redux/store";
+} from "../../redux/interview/action";
+import { baseURL } from "../../redux/store";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import styled from "styled-components";

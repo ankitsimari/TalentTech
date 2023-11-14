@@ -107,7 +107,7 @@ const options = {
 console.log("Options:", options); // Log options to the console
   
   return (
-    <div >
+    <div className="p-5">
 
       <select value={chart} className="ms-8 px-3 py-2 border-2 font-bold border-solid text-customColor border-customColor" onChange={(e)=>setChart(e.target.value)}>
         <option value="line">Line</option>

@@ -41,7 +41,7 @@ const Chat = () => {
         .post(`${baseURL}/openai/start-interview`, initialPrompt,  {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // Adjust content type as needed
+            "Content-Type": "application/json",
           },
         })
         .then((res) => {
@@ -85,11 +85,12 @@ const Chat = () => {
     handleSkeleton();
     dispatch(addInteractionRequest());
     handleSkeleton();
+    
     axios
       .post(`${baseURL}/openai/next-answer`, { answer },  {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type as needed
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -116,11 +117,14 @@ const Chat = () => {
     handleSkeleton();
     dispatch(addInteractionRequest());
     handleSkeleton();
+
+    console.log("token", token);
+
     axios
-      .post(`${baseURL}/openai/end-interview`,  {
+      .post(`${baseURL}/openai/end-interview`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type as needed
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -129,6 +133,7 @@ const Chat = () => {
         handleSkeleton();
       })
       .catch((err) => {
+        console.log(err);
         dispatch(addInteractionFailure());
       });
   };
@@ -136,7 +141,7 @@ const Chat = () => {
   return (
     <div>
       <DIV
-        style={{ height: "60vh", overflowY: "scroll" }}
+        style={{ height: "58vh", overflowY: "scroll" }}
         ref={chatContainerRef}
         id="style-2"
         className="scrollbar"
