@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { setAuthCookies } from "../utils/cookie";
+import { baseURL } from "../redux/store";
 
 export const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -10,7 +11,6 @@ export const Login: React.FC = () => {
   const [password, setPass] = useState<string>("");
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const navigate = useNavigate();
-  const url = `http://localhost:7700`;
 
   const handleSignUp = () => {
     setIsSignUp(true);
@@ -27,13 +27,11 @@ export const Login: React.FC = () => {
     console.log("login-payload", payload);
 
     axios
-      .post(`${url}/auth/login`, payload)
+      .post(`${baseURL}/auth/login`, payload)
       .then((res) => {
         console.log(res.data);
         const token = res.data.token;
-        const username = res.data.user.username;
-        setAuthCookies(token, username);
-        localStorage.setItem("token", res.data.token);
+        setAuthCookies(token);
         alert("Login Successful");
         navigate("/");
       })
@@ -50,13 +48,11 @@ export const Login: React.FC = () => {
     console.log("login-payload", payload);
 
     axios
-      .post(`${url}/auth/login`, payload)
+      .post(`${baseURL}/auth/login`, payload)
       .then((res) => {
         console.log(res.data);
         const token = res.data.token;
-        const username = res.data.user.username;
-        setAuthCookies(token, username);
-        localStorage.setItem("token", res.data.token);
+        setAuthCookies(token);
         alert("Guest Login Successful");
         navigate("/");
       })
@@ -78,12 +74,11 @@ export const Login: React.FC = () => {
     console.log("signup-payload", payload);
 
     axios
-      .post(`${url}/auth/register`, payload)
+      .post(`${baseURL}/auth/register`, payload)
       .then((res) => {
         console.log(res.data);
         const token = res.data.token;
-        const username = res.data.user.username;
-        setAuthCookies(token, username);
+        setAuthCookies(token);
         alert("User Registered Successfully");
         navigate("/");
       })
@@ -100,7 +95,7 @@ export const Login: React.FC = () => {
       <div className={`container ${isSignUp ? "right-panel-active" : ""}`}>
         <div className="form-container sign-up-container">
           <form onSubmit={handleSignUpClick} className="text-center">
-            <h1 className="font-bold m-0">Create Account</h1>
+            <h1 className="font-bold text-xl m-0">Create Account</h1>
             <input
               type="text"
               placeholder="Name"
@@ -130,7 +125,7 @@ export const Login: React.FC = () => {
 
         <div className="form-container sign-in-container">
           <form onSubmit={handleSignInClick} className="text-center">
-            <h1 className="font-bold m-0">Sign in</h1>
+            <h1 className="font-bold m-0 text-xl">Sign in</h1>
             <input
               type="email"
               placeholder="Email"
@@ -158,7 +153,7 @@ export const Login: React.FC = () => {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1 className="font-bold m-0">Welcome Back!</h1>
+              <h1 className="font-bold m-0 text-xl">Welcome Back!</h1>
               <p className="text-base font-light leading-5 tracking-wider my-5">
                 To keep connected with us please login with your personal info
               </p>
@@ -167,7 +162,7 @@ export const Login: React.FC = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className="font-bold m-0">Hello, Explorer!</h1>
+              <h1 className="font-bold m-0 text-xl">Hello, Explorer!</h1>
               <p className="text-base font-light leading-5 tracking-wider my-5">Enter your personal details and start the journey with us</p>
               <button className="border-2 border-solid border-white bg-purple-600 text-white text-sm font-bold uppercase py-3 px-10 rounded-full transition-transform duration-80 ease-in focus:outline-none active:scale-95" onClick={handleSignUp}>
                 Sign Up
@@ -183,8 +178,13 @@ export const Login: React.FC = () => {
 const DIV = styled.div`
   * {
     box-sizing: border-box;
-    margin: auto
+    /* margin: auto */
   }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
   form {
     background-color: #ffffff;
