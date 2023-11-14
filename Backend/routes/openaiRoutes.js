@@ -1,5 +1,8 @@
 const express = require("express");
 const OpenAI = require("openai");
+const prompt = require("../utils/promptgenerator");
+const jwtSecurity = require("../middleware/auth.middleware");
+const UserModel = require("../models/user.model");
 
 const openaiRouter = express.Router();
 
@@ -14,50 +17,51 @@ let conversationState = {
 };
 
 // Endpoint to start the interview
-openaiRouter.post("/start-interview", async (req, res) => {
-  try {
-    const { stack, options } = req.body;
-    // Hardcoded prompt to start the interview
-    const startInterviewPrompt = `You are a virtual interviewer conducting an interview with a candidate for a ${stack} stack developer position. You may ask questions on following topics ${options.join(
-      " "
-    )} ,you MUST Ask questions one by one and not all at once,it is very important you ask only one question at a time ,dont ask "are you ready" or "introduce yourself", wait for the candidate to repond you back with an answer , then ask the next question, Judge the responses by candiate on the Subject matter expertise and commmunication skills on a scale of 1 -10,Candidate may ask you to end the interview, after the candiate has ended the interview , generate a report with average score in both subject matter expertise and coommunication skills`;
+openaiRouter.post(
+  "/start-interview",
+  jwtSecurity.verifyToken,
+  async (req, res) => {
+    try {
+      const { techStack, options } = req.body;
+      // Hardcoded prompt to start the interview
+      const startInterviewPrompt = prompt.startPrompt(techStack, options);
+      // Set up the conversation state with the system message and user prompt
+      conversationState = {
+        messages: [
+          { role: "system", content: startInterviewPrompt },
+          {
+            role: "user",
+            content: "Start the interview",
+          },
+        ],
+      };
 
-    // Set up the conversation state with the system message and user prompt
-    conversationState = {
-      messages: [
-        { role: "system", content: startInterviewPrompt },
-        {
-          role: "user",
-          content: "Start the interview",
-        },
-      ],
-    };
+      // Send the initial prompt to OpenAI and get the assistant's response
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: conversationState.messages,
+      });
 
-    // Send the initial prompt to OpenAI and get the assistant's response
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: conversationState.messages,
-    });
+      // Extract the assistant's response
+      const assistantResponse = response.choices[0]?.message?.content;
 
-    // Extract the assistant's response
-    const assistantResponse = response.choices[0]?.message?.content;
+      conversationState.messages.push({
+        role: "assistant",
+        content: assistantResponse,
+      });
 
-    conversationState.messages.push({
-      role: "assistant",
-      content: assistantResponse,
-    });
-
-    // Send the assistant's response to the user
-    console.log(conversationState);
-    res.status(200).json({ role: "assistant", content: assistantResponse });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: error.message });
+      // Send the assistant's response to the user
+      console.log(conversationState);
+      res.status(200).json({ role: "assistant", content: assistantResponse });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: error.message });
+    }
   }
-});
+);
 
 // Endpoint to get the next answer from the user
-openaiRouter.post("/next-answer", async (req, res) => {
+openaiRouter.post("/next-answer", jwtSecurity.verifyToken, async (req, res) => {
   try {
     // Extract the user's answer from the request body
     const userAnswer = req.body.answer;
@@ -89,38 +93,49 @@ openaiRouter.post("/next-answer", async (req, res) => {
 });
 
 // Endpoint to end the interview and generate a report
-openaiRouter.post("/end-interview", async (req, res) => {
-  try {
-    // Hardcoded prompt to end the interview
-    const endInterviewPrompt =
-      "End the interview,give feedback and generate the report,, you MUST mention average score in Subject Matter Expertise and Communication Skills, taking context from previous answers.";
+openaiRouter.post(
+  "/end-interview",
+  jwtSecurity.verifyToken,
+  async (req, res) => {
+    try {
+      // Hardcoded prompt to end the interview
+      const endInterviewPrompt = prompt.endPrompt();
 
-    // Add the end interview prompt to the conversation state
-    conversationState.messages.push({
-      role: "user",
-      content: endInterviewPrompt,
-    });
+      // Add the end interview prompt to the conversation state
+      conversationState.messages.push({
+        role: "user",
+        content: endInterviewPrompt,
+      });
 
-    // Send the final conversation state to OpenAI and get the assistant's response
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: conversationState.messages,
-    });
+      // Send the final conversation state to OpenAI and get the assistant's response
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: conversationState.messages,
+      });
 
-    // Extract the assistant's response
-    const assistantResponse = response.choices[0]?.message?.content;
-    conversationState.messages.push({
-      role: "assistant",
-      content: assistantResponse,
-    });
+      // Extract the assistant's response
+      const assistantResponse = response.choices[0]?.message?.content;
+      conversationState.messages.push({
+        role: "assistant",
+        content: assistantResponse,
+      });
 
-    // Send the interview report to the user
-    console.log(conversationState);
-    res.status(200).json({ role: "assistant", content: assistantResponse });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: error.message });
+      // Send the interview report to the user
+      console.log(conversationState);
+      const numbers = assistantResponse.match(/\b[0-9]\b/g);
+      const user = await UserModel.findById(req.userId, { password: 0 });
+      user.scores.push({
+        Subject_Matter: numbers[0],
+        Communication: numbers[1],
+        Interview: numbers[2],
+      });
+      await user.save();
+      res.status(200).json({ role: "assistant", content: assistantResponse });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: error.message });
+    }
   }
-});
+);
 
 module.exports = openaiRouter;
