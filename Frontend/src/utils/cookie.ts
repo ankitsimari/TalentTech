@@ -11,5 +11,6 @@ export const getAuthTokenFromCookie = (): string | undefined => {
 };
 
 export const removeAuthCookies = (): void => {
-  Cookies.remove(TOKEN_COOKIE_NAME);
+  //Cookies.remove(TOKEN_COOKIE_NAME);
+  Cookies.remove(TOKEN_COOKIE_NAME, { path: "/" })
 };
