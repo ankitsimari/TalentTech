@@ -16,10 +16,11 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  Scores: [
+  scores: [
     {
       Subject_Matter: Number,
       Communication: Number,
+      Interview: Number,
     },
   ],
 });
