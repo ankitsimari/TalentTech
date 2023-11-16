@@ -37,7 +37,21 @@ npm start
     
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+Landing Page
+
+![Landing Page](./Frontend/src/assets/Page1.png)
+
+Login Signup Page
+
+![Login Page](./Frontend/src/assets/Page2.png)
+
+Interview Page
+
+![Landing Page](./Frontend/src/assets/Page3.png)
+
+Analytics Page
+
+![Landing Page](./Frontend/src/assets/Page4.png)
 
 ## Contributors
 - [Ankit Kumar](https://github.com/ankitsimari)
