@@ -5,7 +5,7 @@ Welcome to TalentTech AI, an innovative platform revolutionizing interviews. Sea
 
 ## Deployment 
 
-[Live-Link]([https://github.com/ankitsimari](https://talent-tech-psi.vercel.app/))
+[Live-Link](https://talent-tech-psi.vercel.app/)
 
 ## Installation
 
