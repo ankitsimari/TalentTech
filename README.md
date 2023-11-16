@@ -3,6 +3,10 @@
 
 Welcome to TalentTech AI, an innovative platform revolutionizing interviews. Seamlessly integrating OpenAI's cutting-edge technology, we've crafted an intuitive interface for conducting interviews via text and video. Empowering recruiters and candidates alike, our platform offers an interactive and efficient experience, leveraging AI to enhance interviewing processes. Join us as we transform traditional interviews into dynamic, insightful conversations.
 
+## Deployment 
+
+[Live-Link]([https://github.com/ankitsimari](https://talent-tech-psi.vercel.app/))
+
 ## Installation
 
 Install our project with npm
