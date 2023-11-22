@@ -11,7 +11,7 @@ const openaiRouter = express.Router();
 // Initialize OpenAI with your API key
 const openai = new OpenAI({
   // apiKey: process.env.API_KEY_2,
-  apiKey: process.env.API_KEY
+  apiKey: process.env.API_KEY,
 });
 
 // Initialize a variable to store conversation state
@@ -126,7 +126,10 @@ openaiRouter.post(
       // Send the interview report to the user
       console.log(conversationState);
       const numbers = assistantResponse.match(/\b[0-9]\b/g);
-      const user = await UserModel.findOne({email: req.body.email}, { password: 0 });
+      const user = await UserModel.findOne(
+        { email: req.body.email },
+        { password: 0 }
+      );
       user.scores.push({
         Subject_Matter: numbers[0],
         Communication: numbers[1],
